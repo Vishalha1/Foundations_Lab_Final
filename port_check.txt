@@ -1,0 +1,8 @@
+--- Checking Server: 127.0.0.1 ---
+SUCCESS: Port 22 is OPEN on 127.0.0.1
+--- Checking Server: 8.8.8.8 ---
+FAILED: Port 22 is CLOSED on 8.8.8.8
+--- Checking Server: 1.1.1.1 ---
+FAILED: Port 22 is CLOSED on 1.1.1.1
+--- Checking Server: 10.0.0.1 ---
+FAILED: Port 22 is CLOSED on 10.0.0.1
