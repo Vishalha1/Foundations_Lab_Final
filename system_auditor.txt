@@ -1,0 +1,11 @@
+THREAT INTEL:
+Reported Malicious Process: unauthorized_cryptominer
+Requirement: Locate the process and generate a JSON security alert.
+vishal@vishal-VirtualBox:~$ nano ~/system_auditor.py
+vishal@vishal-VirtualBox:~$ python3 ~/system_auditor.py
+vishal@vishal-VirtualBox:~$ cat security_alert.json
+{
+    "event": "Unauthorized Process",
+    "severity": "High",
+    "process": "unauthorized_cryptominer"
+}
