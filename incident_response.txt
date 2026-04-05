@@ -1,0 +1,24 @@
+import subprocess
+import json
+
+result = subprocess.run(
+    ["grep", "Failed password", "/var/log/titan_sim/auth_sim.log"],
+    capture_output=True,
+    text=True
+)
+
+raw_output = result.stdout
+
+lines = raw_output.split('\n')
+
+attacker_ips = []
+
+for line in lines:
+    if line:
+        ip = line.split(" ")[10]
+        attacker_ips.append(ip)
+
+alert_data = {
+    "alert_type": "Brute Force",
+    "attacker_ips": attacker_ips
+}
