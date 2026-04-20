@@ -1,0 +1,13 @@
+SESSION 14: GROUP POLICY AUDIT REPORT
+
+Operator: Vishal
+Date: 4/20/2026
+
+Question 1: What does gpupdate /force do?
+Answer: It forces Windows to refresh and apply the latest Group Policy settings immediately.
+
+Question 2: What is LSDOU?
+Answer: LSDOU stands for Local, Site, Domain, and Organizational Unit. It is the order Group Policy is applied.
+
+Question 3: Why was the GPO linked to the Engineering OU?
+Answer: It was linked to the Engineering OU so only the Engineering users would get the Control Panel restriction.
