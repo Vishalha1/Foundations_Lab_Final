@@ -1,0 +1,23 @@
+TLAB-05 Operation Unified Front
+Manual Audit Report
+
+1. Domain Check: PASS
+   Verified domain is Titian.local on TITIAN-DC01.
+
+2. Identity Check: PASS
+   Engineering OU exists.
+   10 Engineering users are present.
+
+3. GPO Check: PASS
+   Security_Hardening GPO exists and is linked to the Engineering OU.
+
+4. Bridge Check: PASS
+   Ubuntu is joined to the Titian.local domain.
+
+5. Unified Identity Proof: PASS
+   Administrator@titian.local authenticated successfully on Ubuntu.
+   sudo whoami returned root.
+
+Artifacts:
+- tlab5_report.txt
+- unified_identity.png
