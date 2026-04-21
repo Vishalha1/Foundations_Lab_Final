@@ -1,0 +1,17 @@
+==================================================
+SESSION 16: READINESS INVENTORY
+==================================================
+Operator: [Name Here]
+Date: [Date Here]
+
+Confidence Audit (Yes/No):
+1. Nmap (Network Scanning): [ ]
+2. Docker (Containerization): [ ]
+3. Linux Hardening (UFW/chmod): [ ]
+4. VS Code Remote-SSH: [ ]
+
+Identify your weakest area and your plan to review it:
+[Type Answer Here]
+==================================================
+dentify your weakest area and your plan to review it:
+My weakest area is Nmap and network troubleshooting. I plan to review the difference between Layer 3, Layer 4, and Layer 7 problems, practice using ss, ping, docker ps, and ufw status numbered, and do more labs so I can identify port conflicts and firewall issues faster
