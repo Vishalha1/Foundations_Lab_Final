@@ -1,0 +1,4 @@
+id Administrator@titian.local
+su - Administrator@titian.local
+sudo whoami
+root
