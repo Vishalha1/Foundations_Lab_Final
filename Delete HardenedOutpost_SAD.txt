@@ -1,0 +1,26 @@
+# TITAN SMALL BUSINESS SERVICES: SECURITY ARCHITECTURE DOCUMENT (SAD)
+**Operator:** Vishal
+**Date:** 2026-04-21
+
+## 1. Perimeter Hardening (UFW & SSH)
+* **SSH Status:** SSH was hardened by setting `PermitRootLogin no`, `PasswordAuthentication no`, and `PubkeyAuthentication yes` in `/etc/ssh/sshd_config`. The configuration was verified with `sudo sshd -t`, and the SSH service was restarted successfully with `sudo systemctl restart ssh`.
+* **Firewall Logic:** UFW was configured with `default deny incoming` and `default allow outgoing`. Port `22/tcp` was explicitly allowed for SSH access, and port `8080/tcp` was explicitly allowed for the web application. All other incoming ports remain blocked by default.
+
+## 2. The Automated Auditor (Python)
+* **Script Logic:** 
+```python
+#!/usr/bin/env python3
+import os
+
+dc_ip = "192.168.50.10"
+log_file = "/var/log/dc_audit.log"
+
+result = os.system(f"ping -c 4 {dc_ip} > /dev/null 2>&1")
+
+if result == 0:
+    status = "DC is UP"
+else:
+    status = "DC is DOWN"
+
+os.system(f'echo "{status}" | sudo tee -a {log_file} > /dev/null')
+print(status)
