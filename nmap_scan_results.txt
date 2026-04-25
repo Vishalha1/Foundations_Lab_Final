@@ -1,0 +1,69 @@
+# S20: Mapping the Shadows - Nmap Scan Results
+
+Operator: Vishal
+Target Subnet: 172.99.0.0/24
+Scan Type: Active Network Enumeration
+
+## Phase 1: Ping Sweep
+
+Command Used:
+nmap -sn 172.99.0.0/24
+
+Live Hosts Found:
+- 172.99.0.5
+- 172.99.0.6
+- 172.99.0.7
+
+Docker Target Mapping:
+- target_web: 172.99.0.5
+- target_cache: 172.99.0.6
+- target_api: 172.99.0.7
+
+## Phase 2: Version Scans
+
+### Target Alpha - 172.99.0.5
+
+Command Used:
+sudo nmap -sV 172.99.0.5
+
+Open Ports:
+- 80/tcp open http nginx 1.29.8
+
+Summary:
+Target Alpha is running an HTTP web service on port 80 using nginx version 1.29.8.
+
+### Target Beta - 172.99.0.6
+
+Command Used:
+sudo nmap -sV -p- 172.99.0.6
+
+Open Ports:
+- 6379/tcp open redis Redis key-value store 8.6.2
+
+Summary:
+Target Beta is running Redis on port 6379. Redis is a key-value database service.
+
+### Target Gamma - 172.99.0.7
+
+Command Used:
+sudo nmap -sV 172.99.0.7
+
+Open Ports:
+- 80/tcp open http Apache httpd 2.4.66 ((Unix))
+
+Summary:
+Target Gamma is running an HTTP web service on port 80 using Apache httpd version 2.4.66.
+
+## Theory Questions
+
+### 1. Why should an operator run a ping sweep before doing deeper port scans?
+
+A ping sweep helps identify which hosts are alive before running deeper scans. This saves time because the operator does not waste effort scanning inactive addresses. It also helps build a basic map of the network before moving into service and version detection.
+
+### 2. Why is service version detection important during network enumeration?
+
+Service version detection is important because open ports alone do not show the full risk. Knowing the exact service and version helps security teams identify outdated software, misconfigurations, and possible vulnerabilities that may affect a specific host.
+
+## Final Summary
+
+The active scan discovered three live hosts on the 172.99.0.0/24 subnet. Target Alpha exposed nginx on port 80, Target Beta exposed Redis on port 6379, and Target Gamma exposed Apache httpd on port 80. These findings provide a clear network map of the sandbox environment.
