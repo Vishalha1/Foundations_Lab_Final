@@ -1,0 +1,46 @@
+cat > ~/api_audit.log <<'EOF'
+================================================
+SESSION 27: API BUSINESS LOGIC AUDIT LOG
+================================================
+
+1. BOLA / IDOR PROFILE TEST
+
+Original Request:
+GET /api/v1/profile/101
+
+Modified Request:
+GET /api/v1/profile/102
+
+Result:
+Changing the profile ID from 101 to 102 allowed access to the private CISO profile.
+
+Leaked CISO Secret:
+TITAN_MASTER_KEY_2026
+
+Remediation:
+The API should enforce object-level authorization on the server side. A user should only be allowed to access profile data that belongs to their own account. Changing an ID in the URL should not allow access to another user's private profile.
+
+
+2. DISCOUNT CODE BUSINESS LOGIC TEST
+
+Original Checkout Request:
+POST /api/v1/checkout
+
+Original Body:
+{"discount_code":"0000"}
+
+Payload Range Tested:
+9900 to 9999
+
+Winning Discount Code:
+9912
+
+Successful Response:
+{"discount":"100% OFF","status":"Success","total":"$0.00"}
+
+Result:
+The hidden discount code 9912 was discovered. When this code was submitted to the checkout API, the response changed to 100% OFF and the total became $0.00.
+
+Remediation:
+The application should not rely on hidden or guessable discount codes. Discount codes should be random, rate-limited, tied to specific users, expire after use, and protected from brute-force attempts.
+EOF
