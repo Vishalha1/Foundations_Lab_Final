@@ -8,4 +8,4 @@ fae1131218de05d59bede9e7702b2ee0
 
 SHA256 Hash of system_artifacts.zip:
 d291c9c9582e509c38eb62f7b6fd71d9fc697f5621caf7442b38fa6e1825ca35
-EOF
+
