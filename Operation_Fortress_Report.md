@@ -1,4 +1,4 @@
-cat > ~/TLAB11/Operation_Fortress_Report.md <<'EOF'
+
 # OPERATION FORTRESS: DEFENSE IN DEPTH REPORT
 
 **Operator:** Vishal Harbance  
